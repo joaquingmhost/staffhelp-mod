@@ -1,0 +1,40 @@
+name: Compilar StaffHelp
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Compilar con Gradle
+        if: hashFiles('gradlew') != ''
+        run: chmod +x gradlew && ./gradlew build
+
+      - name: Compilar con Maven
+        if: hashFiles('pom.xml') != ''
+        run: mvn -B package
+
+      - name: Guardar archivos JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: StaffHelp-JAR
+          path: |
+            **/build/libs/*.jar
+            **/target/*.jar
+          if-no-files-found: error
