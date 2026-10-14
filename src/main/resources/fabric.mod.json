@@ -1,0 +1,19 @@
+{
+	"schemaVersion": 1,
+	"id": "staffhelp",
+	"version": "${version}",
+	"name": "StaffHelp",
+	"description": "Los jugadores piden ayuda al staff con /ayuda <mensaje>. El staff se designa con /staffhelp add <jugador>.",
+	"authors": ["Tu servidor"],
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": ["com.staffhelp.StaffHelpMod"]
+	},
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
